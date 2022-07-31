@@ -1,3 +1,7 @@
 package com.dagger.di
 
-annotation class PerApplication()
+import javax.inject.Qualifier
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class PerApplication
