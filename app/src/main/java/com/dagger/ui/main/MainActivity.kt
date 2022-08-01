@@ -8,6 +8,7 @@ import com.dagger.R
 import com.dagger.databinding.ActivityMainBinding
 import com.dagger.di.component.DaggerActivityComponent
 import com.dagger.di.module.ActivityModule
+import com.dagger.models.DetailsViewModel
 import com.dagger.models.Post
 import com.dagger.ui.main.adapter.AdapterPost
 import com.dagger.ui.main.presenterImpl.MainContract
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         presenter.attachView(this)
         presenter.subscribe()
         presenter.responsePost()
+        presenter.responseLoadDataAll()
     }
 
     private fun injectDependency() {
@@ -53,6 +55,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun onError(message: String) {
 
+    }
+
+    override fun loadDataAllSuccess(model: DetailsViewModel) {
+        Log.d("MODEL_TO_JSON", model.toJson())
+        Log.d("POSTS", model.posts.toString())
+        Log.d("USERS", model.users.toString())
+        Log.d("ALBUMS", model.albums.toString())
     }
 
     override fun onDestroy() {
