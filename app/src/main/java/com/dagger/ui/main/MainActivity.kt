@@ -3,6 +3,7 @@ package com.dagger.ui.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.dagger.R
 import com.dagger.databinding.ActivityMainBinding
 import com.dagger.di.component.DaggerActivityComponent
@@ -46,7 +47,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun progress(show: Boolean) {
-
+        if (show) binding.progressBar.visibility = View.VISIBLE
+        else binding.progressBar.visibility = View.GONE
     }
 
     override fun onError(message: String) {
