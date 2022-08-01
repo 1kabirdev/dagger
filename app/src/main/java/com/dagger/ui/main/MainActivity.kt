@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.dagger.R
+import android.widget.Toast
 import com.dagger.databinding.ActivityMainBinding
 import com.dagger.di.component.DaggerActivityComponent
 import com.dagger.di.module.ActivityModule
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     @Inject
     lateinit var presenter: MainContract.Presenter
     private lateinit var binding: ActivityMainBinding
-    lateinit var adapterPost: AdapterPost
+    private lateinit var adapterPost: AdapterPost
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,9 +53,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         else binding.progressBar.visibility = View.GONE
     }
 
-    override fun onError(message: String) {
+    override fun onError(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
-    }
 
     override fun loadDataAllSuccess(model: DetailsViewModel) {
         Log.d("MODEL_TO_JSON", model.toJson())

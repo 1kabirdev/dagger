@@ -9,13 +9,14 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class MainPresenter : MainContract.Presenter {
 
     private lateinit var view: MainContract.View
     private var subscription = CompositeDisposable()
-    private var api: ApiService = ApiService.create()
 
+    private var api: ApiService = ApiService.create()
 
     override fun responsePost() {
         val subscribe = api.getPostList().subscribeOn(Schedulers.io())
@@ -25,7 +26,7 @@ class MainPresenter : MainContract.Presenter {
                 view.loadData(list!!.take(20))
             }, { error ->
                 view.progress(false)
-                view.onError(error.localizedMessage)
+                view.onError(error.localizedMessage!!)
             })
 
         subscription.add(subscribe)
