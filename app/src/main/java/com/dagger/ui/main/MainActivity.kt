@@ -8,6 +8,7 @@ import com.dagger.databinding.ActivityMainBinding
 import com.dagger.di.component.DaggerActivityComponent
 import com.dagger.di.module.ActivityModule
 import com.dagger.models.Post
+import com.dagger.ui.main.adapter.AdapterPost
 import com.dagger.ui.main.presenterImpl.MainContract
 import javax.inject.Inject
 
@@ -16,11 +17,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     @Inject
     lateinit var presenter: MainContract.Presenter
     private lateinit var binding: ActivityMainBinding
+    lateinit var adapterPost: AdapterPost
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        adapterPost = AdapterPost()
     }
 
     init {
@@ -38,9 +41,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun loadData(list: List<Post>) {
-        for (i in list) {
-            Log.d("LIST", i.title)
-        }
+        adapterPost.addPost(list)
+        binding.recyclerViewPost.adapter = adapterPost
     }
 
     override fun progress(show: Boolean) {
