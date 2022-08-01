@@ -18,7 +18,7 @@ class MainPresenter : MainContract.Presenter {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list: List<Post>? ->
                 view.progress(false)
-                view.loadData(list!!.take(10))
+                view.loadData(list!!.take(20))
             }, { error ->
                 view.progress(false)
                 view.onError(error.localizedMessage)
