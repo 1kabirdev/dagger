@@ -17,27 +17,23 @@ class AdapterPost : RecyclerView.Adapter<AdapterPost.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemListPostBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindViewPost(post: Post) {
-            with(binding) {
-                textViewTitle.text = post.title
-                textViewBody.text = post.body
-            }
+        fun bindViewPost(post: Post) = with(binding) {
+            textViewTitle.text = post.title
+            textViewBody.text = post.body
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            ItemListPostBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        ItemListPostBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
-    }
+    )
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bindViewPost(posts[position])
-    }
+
 
     override fun getItemCount(): Int = posts.size
 }
