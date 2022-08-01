@@ -18,17 +18,8 @@ interface ApiService {
     @GET("albums")
     fun getAlbumList(): Observable<List<Album>>
 
-    @GET("albums/{id}")
-    fun getAlbum(@Path("id") id: Int): Observable<Album>
-
-    @GET("posts/{id}")
-    fun getPost(@Path("id") id: Int): Observable<Post>
-
     @GET("users")
     fun getUserList(): Observable<List<User>>
-
-    @GET("posts/{id}")
-    fun getUser(@Path("id") id: Int): Observable<User>
 
 
     companion object Factory {
