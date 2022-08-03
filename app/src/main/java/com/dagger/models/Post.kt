@@ -1,5 +1,7 @@
 package com.dagger.models
 
+import com.google.gson.Gson
+
 data class Post(
     val id: Int,
     val userId: Int,
@@ -18,3 +20,13 @@ data class Album(
     val userId: Int,
     val title: String
 )
+
+data class DetailsViewModel(
+    val posts: List<Post>,
+    val users: List<User>,
+    val albums: List<Album>
+) {
+    fun toJson(): String {
+        return Gson().toJson(this)
+    }
+}
